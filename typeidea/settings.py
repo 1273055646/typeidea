@@ -32,7 +32,7 @@ ALLOWED_HOSTS = []
 
 
 INSTALLED_APPS = [
-    # 新增内容
+    'typeidea',
     'blog.apps.BlogConfig',
     'config.apps.ConfigConfig',
     'comment.apps.CommentConfig',
