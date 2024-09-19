@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from comment.views import CommentView
 from config.views import LinkListView
 from .custom_site import custom_site
 from blog.views import IndexView, CategoryView, TagView, PostDetailView, SearchView, AuthorView
@@ -29,6 +30,7 @@ urlpatterns = [
     path('links/', LinkListView.as_view(), name='links'),
     path('search/', SearchView.as_view(), name='search'),
     path('author/<int:owner_id>', AuthorView.as_view(), name='author'),
+    path('comment/', CommentView.as_view(), name='comment'),
 
     path('super_admin/', admin.site.urls, name='super-admin'),
     path('admin/', custom_site.urls, name='admin'),

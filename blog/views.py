@@ -2,6 +2,8 @@ from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from django.views.generic import DetailView, ListView
 
+from comment.forms import CommentForm
+from comment.models import Comment
 from config.models import SideBar
 from .models import Post, Category, Tag
 
@@ -107,6 +109,14 @@ class PostDetailView(CommonViewMixin, DetailView):
     template_name = 'blog/detail.html'
     context_object_name = 'post'
     pk_url_kwarg = 'post_id'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'comment_form': CommentForm,
+            'comment_list': Comment.get_by_target(self.request.path),
+        })
+        return context
 
 
 class SearchView(IndexView):
