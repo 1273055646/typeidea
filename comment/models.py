@@ -12,7 +12,6 @@ class Comment(models.Model):
     )
     target = models.CharField(max_length=100, verbose_name='评论目标')
     # target = models.ForeignKey(Post, verbose_name='评论目标', on_delete=models.CASCADE)  # 外键是Post中的id
-    aim = models.ForeignKey(Post, verbose_name='评论文章', on_delete=models.CASCADE)
     content = models.CharField(max_length=2000, verbose_name='内容')
     nickname = models.CharField(max_length=50, verbose_name='昵称')
     website = models.URLField(verbose_name='网站')
