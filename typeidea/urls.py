@@ -15,12 +15,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, re_path
+from django.urls import path, re_path, include
 
 from django.contrib.sitemaps import views as sitemap_views
 from blog.rss import LatestPostFeed
 from blog.sitemap import PostSitemap
-from comment.views import CommentView
+from comment.views import CommentView, VerifyCaptcha
 from config.views import LinkListView
 from .custom_site import custom_site
 from blog.views import IndexView, CategoryView, TagView, PostDetailView, SearchView, AuthorView
@@ -36,6 +36,8 @@ urlpatterns = [
     path('comment/', CommentView.as_view(), name='comment'),
     re_path(r'^rss|feed/', LatestPostFeed(), name='rss'),
     path('sitemap.xml', sitemap_views.sitemap, {'sitemaps': {'posts': PostSitemap}}, name='sitemap'),
+    path('captcha/', include('captcha.urls')),
+    path('verify_captcha/', VerifyCaptcha.as_view(), name='verify_captcha'),
 
     path('super_admin/', admin.site.urls, name='super-admin'),
     path('admin/', custom_site.urls, name='admin'),
